@@ -63,11 +63,7 @@ fn run_tree_command(project_path: &str, tree_level: Option<u32>) -> Option<Strin
         command.arg("-L").arg(level.to_string());
     }
 
-    println!("Running eza command: {:?}", command);
-
     let output = command.output().ok()?;
-
-    println!("eza command output: {:?}", output);
 
     if output.status.success() {
         Some(String::from_utf8_lossy(&output.stdout).to_string())
