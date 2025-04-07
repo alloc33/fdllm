@@ -241,7 +241,7 @@ fn main() {
         if project_path.exists() {
             if let Some(tree_output) = run_tree_command(&project_path.to_string_lossy(), project.tree_level) {
                 combined_content.push_str(&format!(
-                    "NOTE: Project Tree: {}\n{}\n",
+                    "# NOTE: Project Tree: {}\n{}\n",
                     project_path.display(),
                     tree_output
                 ));
@@ -257,7 +257,7 @@ fn main() {
         if file_path.exists() && file_path.is_file() {
             match fs::read_to_string(&file_path) {
                 Ok(file_content) => {
-                    combined_content.push_str(&format!("NOTE: {}:\n{}\n", file, file_content));
+                    combined_content.push_str(&format!("# NOTE: {}:\n{}\n", file, file_content));
                 },
                 Err(err) => {
                     eprintln!("Failed to read file {}: {}", file_path.display(), err);
