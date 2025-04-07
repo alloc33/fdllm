@@ -115,10 +115,11 @@ fn collect_files_from_directory(dir_path: &Path) -> Vec<PathBuf> {
     // File extensions or names to exclude
     let excluded_files = [".DS_Store", ".git", ".gitignore", "target"];
     
-    // Valid text file extensions to include
+    // Add your needed extensions
     let valid_extensions = [
         ".rs", ".toml", ".json", ".yaml", ".yml", ".md", ".txt", 
-        ".c", ".h", ".cpp", ".hpp", ".js", ".ts", ".py", ".go", ".sh"
+        ".c", ".h", ".cpp", ".hpp", ".js", ".ts", ".py", ".go", ".sh",
+        ".csv", ".log" // Add your specific file extensions
     ];
     
     if let Ok(entries) = fs::read_dir(dir_path) {
@@ -137,6 +138,9 @@ fn collect_files_from_directory(dir_path: &Path) -> Vec<PathBuf> {
                     let ext = format!(".{}", extension.to_string_lossy());
                     if valid_extensions.contains(&ext.as_str()) {
                         files.push(path);
+                    } else {
+                        // Debug print to help understand what's being filtered
+                        println!("Skipping file with unsupported extension: {}", path.display());
                     }
                 }
             } else if path.is_dir() {
@@ -146,6 +150,9 @@ fn collect_files_from_directory(dir_path: &Path) -> Vec<PathBuf> {
             }
         }
     }
+    
+    // Debug print to help understand what files were found
+    println!("Found {} files in directory: {}", files.len(), dir_path.display());
     
     files
 }
