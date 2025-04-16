@@ -119,7 +119,7 @@ fn collect_files_from_directory(dir_path: &Path) -> Vec<PathBuf> {
     let valid_extensions = [
         ".rs", ".toml", ".json", ".yaml", ".yml", ".md", ".txt", 
         ".c", ".h", ".cpp", ".hpp", ".js", ".ts", ".py", ".go", ".sh",
-        ".csv", ".log", ".lua"
+        ".csv", ".log", ".lua", ".nu"
     ];
     
     if let Ok(entries) = fs::read_dir(dir_path) {
